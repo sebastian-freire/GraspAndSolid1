@@ -41,10 +41,8 @@ namespace Full_GRASP_And_SOLID.Library
             double costo = 0;
             foreach (Step step in this.steps)
             {
-                costo += step.Equipment.HourlyCost * (step.Time/60);
-                Console.WriteLine($"{step.Equipment.HourlyCost} * ({step.Time/60})");
-                costo += step.Input.UnitCost * step.Quantity;
-                Console.WriteLine($"{step.Input.UnitCost} * {step.Quantity}");
+                costo += step.Equipment.HourlyCost * (step.Time/60); //Costo equipamento
+                costo += step.Input.UnitCost * step.Quantity;  //Costo Producto
             }
             return costo;
         }
@@ -57,7 +55,7 @@ namespace Full_GRASP_And_SOLID.Library
                 Console.WriteLine($"{step.Quantity} de '{step.Input.Description}' " +
                     $"usando '{step.Equipment.Description}' durante {step.Time}");
             }
-            Console.WriteLine($"El costo total de la receta es de {GetProductionCost()}");
+            Console.WriteLine($"El costo total de la receta es de {this.GetProductionCost()}");
         }
     }
 }
