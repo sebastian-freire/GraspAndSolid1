@@ -9,6 +9,17 @@ using System.Collections;
 
 namespace Full_GRASP_And_SOLID.Library
 {
+    /*
+    Segun el patrón expert la clase a la que hay que asignarle una tarea es a la que tiene todos los datos
+    necesarios para realizarla, es decir, el experto en informacion.
+
+    En este caso el experto en informacion para calcular el costo total es Recipe, ya que Step contiene
+    la cantidad, el producto(costo unitario) / el equipamento(costo por hora) y el tiempo usado.
+    Pero no contiene todos los steps, solo uno.
+    
+    La clase recipe tiene un array con cada uno de los step, entonces es facil recorrerlos uno a uno,
+    sumando el costo por step y luego hacer una suma total.
+    */
     public class Recipe
     {
         private ArrayList steps = new ArrayList();
@@ -30,8 +41,10 @@ namespace Full_GRASP_And_SOLID.Library
             double costo = 0;
             foreach (Step step in this.steps)
             {
-                costo += step.Equipment.HourlyCost * step.Time;
+                costo += step.Equipment.HourlyCost * (step.Time/60);
+                Console.WriteLine($"{step.Equipment.HourlyCost} * ({step.Time/60})");
                 costo += step.Input.UnitCost * step.Quantity;
+                Console.WriteLine($"{step.Input.UnitCost} * {step.Quantity}");
             }
             return costo;
         }
